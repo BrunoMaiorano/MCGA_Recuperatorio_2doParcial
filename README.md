@@ -1,1 +1,1 @@
-# MCGA_Recuperatorio_2doParcial
+# MCGA - Recuperatior Segundo Parcial
