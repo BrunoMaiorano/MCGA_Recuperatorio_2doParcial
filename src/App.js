@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux'
 import{ saveUsers } from "./redux/Users/thunks" */
 import Home from "./pages/Home"
 import About from "./pages/About"
-import Products from "./pages/Products"
+import Users from "./pages/Users"
 
 import {Routes, Route} from "react-router-dom"
 import Layout from './components/Layout';
@@ -49,9 +49,10 @@ function App(){
       
       <Routes>
         <Route path='/' element={<Layout />}>
-          <Route path='/home' index element={<Home />} /> 
+          <Route index element={<Home />} /> 
+          <Route path='home' element={<Home />} /> 
           <Route path='about' element={<About />} />
-          <Route path='products' element={<Products />} />
+          <Route path='users' element={<Users />} />
         </Route>
       </Routes>
 
