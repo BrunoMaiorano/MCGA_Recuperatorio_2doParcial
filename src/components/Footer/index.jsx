@@ -1,7 +1,12 @@
+import styles from "./footer.module.css"
+
 const Footer = () => {
     return(
-        <div>
-            <h3>Este es el footer</h3>
+        <div className={styles.container}>
+            <div className={styles.title}>
+                <p>Maiorano Bruno</p>
+                <a href="https://github.com/BrunoMaiorano/MCGA_Recuperatorio_2doParcial">Link a repositorio Github</a>
+            </div>
         </div>
     )
 }

@@ -1,0 +1,10 @@
+.container {
+    align-items: center;
+    background-color: tomato;
+}
+
+.title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: whitesmoke;
+}

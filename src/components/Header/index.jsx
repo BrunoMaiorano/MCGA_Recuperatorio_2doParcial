@@ -1,6 +1,10 @@
+import styles from "./header.module.css"
+
 const Header = () => {
     return(
-        <h2>Este es el Header!!</h2>
+        <div className={styles.container}>
+            <div className={styles.title}>PARCIAL 2 - MCGA2022</div>
+        </div>
     )
 }
 
