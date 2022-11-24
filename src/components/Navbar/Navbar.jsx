@@ -26,6 +26,7 @@ const Navbar = () => {
             <Link to="/home">Home</Link> {" "}
             <Link to="/about">About</Link> {" "}
             <Link to="/users">Users</Link> {" "}
+            <Link to="/add" >Add User</Link> {" "}
 
             <form 
              onSubmit={handleSubmit}

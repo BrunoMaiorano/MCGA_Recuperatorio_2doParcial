@@ -2,6 +2,9 @@ import{
     saveData,
     saveDataLoading,
     saveDataError,
+    addUser,
+    addUserLoading,
+    addUserError
 } from "./actions"
 
 export const saveUsers = () => async (dispatch) => {
@@ -16,5 +19,27 @@ export const saveUsers = () => async (dispatch) => {
         dispatch(saveDataLoading(false));
     } catch (error) {
         dispatch(saveDataError());
+    }
+}
+
+export const addUserThunk = (user) => async (dispatch) => {
+    try {
+        dispatch(addUserLoading(true));
+        const response = await fetch('https://dummyjson.com/users/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user),
+        })
+        .then(res => res.json())
+        .then(console.log)
+        
+        /* const userResponse = await response.json();
+        if (response.status !== 201) throw new Error('Error');
+        dispatch(addUser(userResponse));
+        dispatch(addUserLoading(false)); */
+    } catch (error) {
+        dispatch(addUserError());
     }
 }

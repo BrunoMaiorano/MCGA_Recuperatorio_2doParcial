@@ -3,6 +3,7 @@ import './App.css';
 import Home from "./pages/Home"
 import About from "./pages/About"
 import Users from "./pages/Users"
+import AddUser from './pages/addUser/index';
 
 import {Routes, Route} from "react-router-dom"
 import Layout from './components/Layout';
@@ -19,6 +20,7 @@ function App(){
           <Route path='home' element={<Home />} /> 
           <Route path='about' element={<About />} />
           <Route path='users' element={<Users />} />
+          <Route path='add' element={<AddUser />} />
         </Route>
       </Routes>
 
