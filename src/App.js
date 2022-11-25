@@ -2,7 +2,7 @@ import './App.css';
 
 import Home from "./pages/Home"
 import About from "./pages/About"
-import Users from "./pages/Users"
+import Users from "./pages/Users/Users"
 import AddUser from './pages/addUser/index';
 
 import {Routes, Route} from "react-router-dom"

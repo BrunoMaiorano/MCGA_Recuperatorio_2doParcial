@@ -4,7 +4,10 @@ import{
     saveDataError,
     addUser,
     addUserLoading,
-    addUserError
+    addUserError,
+    deleteUser,
+    deleteUserLoading,
+    deleteUserError
 } from "./actions"
 
 export const saveUsers = () => async (dispatch) => {
@@ -38,5 +41,19 @@ export const addUserThunk = (user) => async (dispatch) => {
         dispatch(addUserLoading(false));
     } catch (error) {
         dispatch(addUserError());
+    }
+}
+
+export const deleteUserThunk = (id) => async (dispatch) => {
+    try {
+        dispatch(deleteUserLoading(true));
+        const response = await fetch(`https://mcga2022-user-app.onrender.com/api/users/delete/${id}`, {
+            method: 'DELETE',
+        });
+        if (response.status !== 200) throw new Error('Error');
+        dispatch(deleteUser(id));
+        dispatch(deleteUserLoading(false));
+    } catch (error) {
+        dispatch(deleteUserError());
     }
 }

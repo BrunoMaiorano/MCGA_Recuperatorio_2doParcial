@@ -4,7 +4,10 @@ import {
     SAVE_DATA_REJECTED,
     ADD_USER_FULLFILLED,
     ADD_USER_LOADING,
-    ADD_USER_REJECTED
+    ADD_USER_REJECTED,
+    DELETE_USER,
+    DELETE_USER_LOADING,
+    DELETE_USER_REJECTED
 } from './types'
 
 const initialState = {
@@ -58,7 +61,29 @@ const usersReducer = (state = initialState, action) => {
             isError: true,
             isLoading: false,
         };
+    
+        //BORRAR
 
+    case DELETE_USER:{
+        return {
+            ...state,
+            data: state.data.filter((item) => item._id !== action.payload),
+            isError: false
+        }
+    };
+
+    case DELETE_USER_LOADING:
+        return {
+            ...state,
+            isLoading: action.payload
+        };
+
+    case DELETE_USER_REJECTED:
+        return {
+            ...state,
+            isError: true,
+            isLoading: false
+        }
 
         default:
             return state
