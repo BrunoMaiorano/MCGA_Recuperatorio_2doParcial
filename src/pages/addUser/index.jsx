@@ -61,8 +61,19 @@ const AddUser = () => {
                 )}
             </div>
 
+            <div>
+                <label>Email</label>
+                <input type="text" id="email" 
+                    {...register('email', {required: true})}
+                />
+                {errors.email && errors.email.type === "required" && (
+                    <span>this field is required</span>
+                )}
+            </div>
+
             <button type="submit">
                     Create
+                    
             </button>
 
 

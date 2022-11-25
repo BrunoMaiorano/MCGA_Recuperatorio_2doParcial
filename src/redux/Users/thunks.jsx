@@ -11,10 +11,10 @@ export const saveUsers = () => async (dispatch) => {
     try {
         dispatch(saveDataLoading(true)); //comienzo a traer los datos
         /* const response = await fetch(`${process.env.REACT_APP_API_URL}/users`); */
-        const response = await fetch('https://dummyjson.com/users')
+        const response = await fetch('https://mcga2022-user-app.onrender.com/api/users')
         const data = await response.json();
         if (response.status !== 200) throw new Error('Error');
-        dispatch(saveData(data), console.log(data));
+        dispatch(saveData(data));
         /* console.log(data) */
         dispatch(saveDataLoading(false));
     } catch (error) {
@@ -25,20 +25,17 @@ export const saveUsers = () => async (dispatch) => {
 export const addUserThunk = (user) => async (dispatch) => {
     try {
         dispatch(addUserLoading(true));
-        const response = await fetch('https://dummyjson.com/users/add', {
+        const response = await fetch('https://mcga2022-user-app.onrender.com/api/users/create', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(user),
         })
-        .then(res => res.json())
-        .then(console.log)
-        
-        /* const userResponse = await response.json();
+        const userResponse = await response.json();
         if (response.status !== 201) throw new Error('Error');
         dispatch(addUser(userResponse));
-        dispatch(addUserLoading(false)); */
+        dispatch(addUserLoading(false));
     } catch (error) {
         dispatch(addUserError());
     }

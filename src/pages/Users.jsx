@@ -5,26 +5,21 @@ import{ saveUsers } from "../redux/Users/thunks"
 
 const Users = (props) => {
     
-    const {users, isLoading} = useSelector((state) => state.users.users)
+    const userSelector = useSelector((state) => state.users.users)
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(saveUsers())
     }, [dispatch])
 
-    console.log(users)
+    console.log(userSelector)
     
-    if(isLoading === true){
-        return(
-          <p>cargando...</p>
-        )
-      } else {
         return (
           <div className="App">
           <h3>Lista de Usuarios</h3>
-          {users?.map((user) => {
+          {userSelector.data?.map((user) => {
                return(
-                <li key={user.id}>
+                <li key={user._id}>
                   <strong>{user.firstName}</strong> {" "}
                 </li>
               )
@@ -35,5 +30,5 @@ const Users = (props) => {
         )
 
     }
-}
+
 export default Users
