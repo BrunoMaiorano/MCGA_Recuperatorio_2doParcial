@@ -7,7 +7,10 @@ import{
     addUserError,
     deleteUser,
     deleteUserLoading,
-    deleteUserError
+    deleteUserError,
+    updateUser,
+    updateUserLoading,
+    updateUserError
 } from "./actions"
 
 export const saveUsers = () => async (dispatch) => {
@@ -55,5 +58,25 @@ export const deleteUserThunk = (id) => async (dispatch) => {
         dispatch(deleteUserLoading(false));
     } catch (error) {
         dispatch(deleteUserError());
+    }
+}
+
+
+export const updateUserThunk = (user) => async (dispatch) => {
+    try {
+        dispatch(updateUserLoading(true));
+        const response = await fetch(`https://mcga2022-user-app.onrender.com/api/users/update/${user._id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(user),
+        });
+        const userResponse = await response.json();
+        if (response.status !== 200) throw new Error('Error');
+        dispatch(updateUser(userResponse));
+        dispatch(updateUserLoading(false));
+    } catch (error) {
+        dispatch(updateUserError());
     }
 }

@@ -7,7 +7,10 @@ import {
     ADD_USER_REJECTED,
     DELETE_USER,
     DELETE_USER_LOADING,
-    DELETE_USER_REJECTED
+    DELETE_USER_REJECTED,
+    UPDATE_USER,
+    UPDATE_USER_LOADING,
+    UPDATE_USER_REJECTED
 } from './types'
 
 const initialState = {
@@ -84,6 +87,33 @@ const usersReducer = (state = initialState, action) => {
             isError: true,
             isLoading: false
         }
+
+    //UPDATE
+
+    case UPDATE_USER:
+        return {
+            ...state,
+            data: state.data.map((user) => {
+                if (user._id === action.payload._id) {
+                    return action.payload;
+                }
+                return user;
+            }),
+            isError: false,
+        };
+
+    case UPDATE_USER_LOADING:
+        return {
+            ...state,
+            isLoading: action.payload,
+        };
+
+    case UPDATE_USER_REJECTED:
+        return {
+            ...state,
+            isError: true,
+            isLoading: false,
+        };
 
         default:
             return state

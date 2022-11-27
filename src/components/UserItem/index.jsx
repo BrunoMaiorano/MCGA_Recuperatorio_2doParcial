@@ -4,6 +4,7 @@ import {Link} from "react-router-dom"
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { deleteUserThunk } from "../../redux/Users/thunks";
+import Button from "../shared/Button/index";
 
 const UserItem = ({user}) => {
     const [deleted, setDeleted] = useState(false)
@@ -24,12 +25,13 @@ const UserItem = ({user}) => {
             <p className={styles.item}><strong>Apellido: </strong>{user.lastName}</p>
             <p className={styles.item}><strong>Edad: </strong>{user.age}</p>
             <p className={styles.item}><strong>Email: </strong>{user.email}</p>
-            <Link>
-                <strong>Edit</strong> {" "}
-            </Link>
-            <button onClick={handleDelete}>
-                delete
+            <button>
+                <Link to={`/update/${user._id}`}>
+                    <strong>Edit</strong> {" "}
+                </Link>
             </button>
+
+            <Button name="Delete" onClick={handleDelete} />
         </div>
     )
 

@@ -1,36 +1,49 @@
-import React, {useState} from "react";
-import {set, useForm} from "react-hook-form"
-import { useSelector, useDispatch } from "react-redux";
-import { addUserThunk } from "../../redux/Users/thunks";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import {useForm} from "react-hook-form"
+import {useSelector, useDispatch} from "react-redux"
+import { useNavigate } from "react-router-dom";
+import { updateUserThunk } from "../../redux/Users/thunks";
 
-const AddUser = () => {
-    
-    const [submited, setSubmited] = useState(false)
-    const userSelector = useSelector((state) => state.users)
+const UpdateUser = () => {
+    const [submited, setSubmited] = useState(false);
+    const userSelector = useSelector((state) => state.users);
 
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
-    const {register, handleSubmit, formState: {errors}} = useForm();
+    const user = userSelector.users.data.filter((user) => {
+        const id = window.location.pathname.split("/")[2];
+        return user._id === id;
+    })[0];
+
+    const {register, handleSubmit, formState: {errors},} = useForm({
+        defaultValues: {
+            firstName: user.firstName,
+            lastName: user.lastName,
+            age: user.age,
+            email: user.email
+        }
+    });
 
     const onSubmit = (data) => {
-        dispatch(addUserThunk(data))
-        setSubmited(true)
+        data._id = user._id;
+        console.log(data)
+        dispatch(updateUserThunk(data));
+        setSubmited(true);
     }
 
 
     if(userSelector.isLoading) {
         return(
-            <h3>Se esta creando...</h3>
+            <h3>CARGANDO...</h3>
         )
     }
-
 
     if(submited){
         navigate("/users")
     }
-    
+
+
     return(
         <form onSubmit={handleSubmit(onSubmit)}>
 
@@ -85,13 +98,12 @@ const AddUser = () => {
 
 
                 <button type="submit" > 
-                        Create
+                        Update
                 </button>
             
-
-
         </form>    
     )
+
 }
 
-export default AddUser;
+export default UpdateUser;

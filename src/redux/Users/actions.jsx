@@ -7,7 +7,10 @@ import {
     ADD_USER_REJECTED,
     DELETE_USER,
     DELETE_USER_LOADING,
-    DELETE_USER_REJECTED
+    DELETE_USER_REJECTED,
+    UPDATE_USER,
+    UPDATE_USER_LOADING,
+    UPDATE_USER_REJECTED
 } from './types'
 
 
@@ -59,20 +62,43 @@ export const addUser = (data) => {
 
   export const deleteUser = (data) => {
     return {
-      type: ADD_USER_FULLFILLED,
+      type: DELETE_USER,
       payload: data,
     };
   };
   
   export const deleteUserLoading = (isLoading) => {
     return {
-      type: ADD_USER_LOADING,
+      type: DELETE_USER_LOADING,
       payload: isLoading,
     };
   };
   
   export const deleteUserError = () => {
     return {
-      type: ADD_USER_REJECTED,
+      type: DELETE_USER_REJECTED,
     };
   };
+
+
+  //Acciones de Actualizar
+
+  export const updateUser = (data) => {
+    return {
+        type: UPDATE_USER,
+        payload: data,
+    };
+};
+
+export const updateUserLoading = (isLoading) => {
+    return {
+        type: UPDATE_USER_LOADING,
+        payload: isLoading,
+    };
+};
+
+export const updateUserError = () => {
+    return {
+        type: UPDATE_USER_REJECTED,
+    };
+};
