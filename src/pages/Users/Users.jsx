@@ -5,7 +5,7 @@ import{ saveUsers } from "../../redux/Users/thunks"
 import styles from "./user.module.css"
 
 
-const Users = (props) => {
+const Users = () => {
     
     const userSelector = useSelector((state) => state.users)
     const dispatch = useDispatch();
@@ -28,9 +28,10 @@ const Users = (props) => {
 
             <div className={styles.row}>
                 {userSelector.users.data?.map((user) => {
+
                     return (
                         <div className={styles.column}>
-                            <UserItem user={user} key={user._id + props.index} />
+                            <UserItem user={user} key={user._id} />
                         </div>
                     )
                 })}

@@ -1,7 +1,7 @@
 import './App.css';
 
 import Home from "./pages/Home"
-import About from "./pages/About"
+import About from "./pages/About/About"
 import Users from "./pages/Users/Users"
 import AddUser from './pages/addUser/index';
 import UpdateUser from './pages/updateUser/index';
