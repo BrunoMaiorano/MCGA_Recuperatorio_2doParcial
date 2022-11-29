@@ -20,6 +20,7 @@ const Users = () => {
             <h3>LOADING....</h3>
         )
     }
+
     
         return (
           <div className="App">
@@ -28,10 +29,9 @@ const Users = () => {
 
             <div className={styles.row}>
                 {userSelector.users.data?.map((user) => {
-
                     return (
-                        <div className={styles.column}>
-                            <UserItem user={user} key={user._id} />
+                        <div className={styles.column} key={user._id}>
+                            <UserItem user={user} />
                         </div>
                     )
                 })}

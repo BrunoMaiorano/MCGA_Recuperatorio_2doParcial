@@ -3,6 +3,7 @@ import {useForm} from "react-hook-form"
 import {useSelector, useDispatch} from "react-redux"
 import { useNavigate } from "react-router-dom";
 import { updateUserThunk } from "../../redux/Users/thunks";
+import styles from "./updateUser.module.css"
 
 const UpdateUser = () => {
     const [submited, setSubmited] = useState(false);
@@ -27,7 +28,6 @@ const UpdateUser = () => {
 
     const onSubmit = (data) => {
         data._id = user._id;
-        console.log(data)
         dispatch(updateUserThunk(data));
         setSubmited(true);
     }
@@ -45,63 +45,69 @@ const UpdateUser = () => {
 
 
     return(
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <div className={styles.container}>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <div>
+                    <label className={styles.title}>FirstName</label>
+                    <input type="text" id="firstName" 
+                        {...register('firstName', {required: true, maxLength: 30})}
+                    />
+                    {errors.firstName && errors.firstName.type === "required" && (
+                        <span>this field is required</span>
+                    )}
+                    {errors.firstName && errors.firstName.type === "maxLength" && (
+                        <span>Max length: 30 characters</span>
+                    )}
+                </div>
 
-            <div>
-                <label>FirstName</label>
-                <input type="text" id="firstName" 
-                    {...register('firstName', {required: true, maxLength: 30})}
-                />
-                {errors.firstName && errors.firstName.type === "required" && (
-                    <span>this field is required</span>
-                )}
-                 {errors.firstName && errors.firstName.type === "maxLength" && (
-                    <span>Max length: 30 characters</span>
-                )}
-            </div>
+                <div>
+                    <label className={styles.title}>LastName</label>
+                    <input type="text" id="lastName" 
+                        {...register('lastName', {required: true, maxLength: 30})}
+                    />
+                    {errors.lastName && errors.lastName.type === "required" && (
+                        <span>this field is required</span>
+                    )}
+                    {errors.lastName && errors.lastName.type === "maxLength" && (
+                        <span>Max length: 30 characters</span>
+                    )}
+                </div>
 
-            <div>
-                <label>LastName</label>
-                <input type="text" id="lastName" 
-                    {...register('lastName', {required: true, maxLength: 30})}
-                />
-                {errors.lastName && errors.lastName.type === "required" && (
-                    <span>this field is required</span>
-                )}
-                 {errors.lastName && errors.lastName.type === "maxLength" && (
-                    <span>Max length: 30 characters</span>
-                )}
-            </div>
+                <div>
+                    <label className={styles.title}>Age</label>
+                    <input type="number" id="age" 
+                        {...register('age', {required: true, min: 0})}
+                    />
+                    {errors.age && errors.age.type === "required" && (
+                        <span>this field is required</span>
+                    )}
+                    {errors.age && errors.age.type === "min" && (
+                        <span>Age cant be negative</span>
+                    )}
+                </div>
 
-            <div>
-                <label>Age</label>
-                <input type="number" id="age" 
-                    {...register('age', {required: true, min: 0})}
-                />
-                {errors.age && errors.age.type === "required" && (
-                    <span>this field is required</span>
-                )}
-                 {errors.age && errors.age.type === "min" && (
-                    <span>Age cant be negative</span>
-                )}
-            </div>
-
-            <div>
-                <label>Email</label>
-                <input type="text" id="email" 
-                    {...register('email', {required: true})}
-                />
-                {errors.email && errors.email.type === "required" && (
-                    <span>this field is required</span>
-                )}
-            </div>
+                <div>
+                    <label className={styles.title}>Email</label>
+                    <input type="text" id="email" 
+                        {...register('email', {required: true,  pattern:{
+                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                        }})}
+                    />
+                    {errors.email && errors.email.type === "required" && (
+                        <span>this field is required</span>
+                    )}
+                    {errors.email && errors.email.type === "pattern" && (
+                        <span>invalid email address</span>
+                    )}
+                </div>
 
 
-                <button type="submit" > 
-                        Update
-                </button>
-            
-        </form>    
+                    <button type="submit" > 
+                            Update
+                    </button>
+
+                </form>    
+        </div>
     )
 
 }

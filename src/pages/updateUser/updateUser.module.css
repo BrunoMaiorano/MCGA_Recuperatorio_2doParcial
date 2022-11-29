@@ -1,0 +1,10 @@
+.container{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.title{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+    padding-right: 1rem;
+}
